@@ -1,3 +1,6 @@
+$PSPersonalProfileFolder = (get-item $profile.CurrentUserAllHosts).DirectoryName
+
+# 1, 2, 3
 function ott {Get-Random -maximum 4 -Minimum 1}
 
 function Open-WorkingDirectory{
@@ -28,7 +31,7 @@ function Open-WorkingDirectory{
     )
     
     process{
-        if(Test-Path $PATH){
+        if(Test-Path $Path){
             explorer $Path
         }
         else {
