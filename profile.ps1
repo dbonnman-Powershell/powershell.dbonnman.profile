@@ -36,4 +36,5 @@ function Open-WorkingDirectory{
         }
     }
 }
-New-Alias -Name owd -Value Open-WorkingDirectory
+
+Set-Alias -Name owd -Value Open-WorkingDirectory
