@@ -66,7 +66,7 @@ function Get-TimeWorked {
         [ValidateRange(0, 2359)]
         [Int]
         $ClockedIn,
-        # Parameter help description
+        # Set this to also show, what time you can go home and the time remaining till then
         [Parameter()]
         [Switch]
         $Feierabend = $false
@@ -92,7 +92,7 @@ function Get-TimeWorked {
         if($Feierabend){
             $FeierabendTime = $ClockedIntDateObject.AddHours(8).AddMinutes(30)
             $TimeToFeierabend = $FeierabendTime.Subtract($CurrentTime)
-            "You can go home at $($FeierabendTime.TimeOfDay) (Time remaining: $($TimeToFeierabend.ToString("hh\:mm")))"
+            "You can go home at $($FeierabendTime.ToString("HH:mm")) (Time remaining: $($TimeToFeierabend.ToString("hh\:mm")))"
         }
 
         Write-Verbose "It is now $($CurrentTime.TimeOfDay)"
