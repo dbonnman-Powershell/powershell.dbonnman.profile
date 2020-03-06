@@ -149,3 +149,8 @@ function Get-CheatSheet {
     }
 }
 Set-Alias -Name cht -Value Get-CheatSheet
+
+function Reset-Explorer{
+    Get-Process explorer | Stop-Process
+}
+Set-Alias -Name rex -Value Reset-Explorer
