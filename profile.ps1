@@ -125,3 +125,31 @@ Set-Alias -Name clock -Value Get-TimeWorked
 function Connect-One{
     Connect-VIServer -Server vcsa-one -Credential (Import-Clixml "H:\Scripting\VMware\cred.xml")
 }
+
+function Connect-Do{
+    Connect-VIServer -Server do-vcsa -Credential (Import-Clixml "H:\Scripting\VMware\cred_rzdo.xml")
+}
+
+function Get-CheatSheet {
+    [CmdletBinding()]
+    param (
+        # Parameter help description
+        [Parameter(ValueFromPipeline, Position=0)]
+        [String]
+        $SearchTerm
+    )
+    
+    begin {
+        
+    }
+    
+    process {
+        Invoke-WebRequest -Uri "http://cheat.sh/$($SearchTerm)" -UserAgent curl
+    }
+    
+    end {
+        
+    }
+}
+
+Set-Alias -Name cht -Value Get-CheatSheet
