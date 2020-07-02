@@ -153,3 +153,25 @@ function Get-CheatSheet {
 }
 
 Set-Alias -Name cht -Value Get-CheatSheet
+
+function Restart-Explorer{
+    Get-Process explorer | Stop-Process
+}
+
+Set-Alias -Name rex value Restart-Explorer
+
+function lazygit{
+    [CmdletBinding()]
+    param (
+        [Parameter(
+            Position=0
+        )]
+        [String]
+        $CommitMessage = "."
+    )
+    git add .
+    git commit -m $CommitMessage
+    git push
+}
+Set-Alias -Name lazygit -Value Invoke-LazyGit
+Set-Alias -Name g -Value Invoke-LazyGit
