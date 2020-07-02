@@ -160,7 +160,7 @@ function Restart-Explorer{
 
 Set-Alias -Name rex value Restart-Explorer
 
-function lazygit{
+function Invoke-LazyGit{
     [CmdletBinding()]
     param (
         [Parameter(
