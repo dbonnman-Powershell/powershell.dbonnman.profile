@@ -158,7 +158,7 @@ function Restart-Explorer{
     Get-Process explorer | Stop-Process
 }
 
-Set-Alias -Name rex value Restart-Explorer
+Set-Alias -Name rex -Value Restart-Explorer
 
 function Invoke-LazyGit{
     [CmdletBinding()]
