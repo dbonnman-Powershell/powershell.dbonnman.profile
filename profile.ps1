@@ -1,7 +1,5 @@
 $PSPersonalProfileFolder = (get-item $profile.CurrentUserAllHosts).DirectoryName
 
-New-Alias -Name uhm -Value Get-Command
-
 # 1, 2, 3
 function ott { Get-Random -maximum 4 -Minimum 1 }
 
@@ -91,7 +89,7 @@ function Get-TimeWorked {
             0
         )
         Write-Verbose "Clocked in at $($ClockedIntDateObject.TimeOfDay)"
-        if ($Feierabend) {
+        if($Feierabend){
             $FeierabendTime = $ClockedIntDateObject.AddHours(8).AddMinutes(30)
             $TimeToFeierabend = $FeierabendTime.Subtract($CurrentTime)
             "You can go home at $($FeierabendTime.ToString("HH:mm")) (Time remaining: $($TimeToFeierabend.ToString("hh\:mm")))"
@@ -121,10 +119,15 @@ function Get-TimeWorked {
         
     }
 }
+
 Set-Alias -Name clock -Value Get-TimeWorked
 
-function Connect-One {
+function Connect-One{
     Connect-VIServer -Server vcsa-one -Credential (Import-Clixml "H:\Scripting\VMware\cred.xml")
+}
+
+function Connect-Do{
+    Connect-VIServer -Server do-vcsa -Credential (Import-Clixml "H:\Scripting\VMware\cred_rzdo.xml")
 }
 
 function Get-CheatSheet {
@@ -141,16 +144,34 @@ function Get-CheatSheet {
     }
     
     process {
-        (Invoke-WebRequest -Uri "http://cheat.sh/$($SearchTerm)" -UserAgent curl).Content
+        Invoke-WebRequest -Uri "http://cheat.sh/$($SearchTerm)" -UserAgent curl
     }
     
     end {
         
     }
 }
+
 Set-Alias -Name cht -Value Get-CheatSheet
 
-function Reset-Explorer{
+function Restart-Explorer{
     Get-Process explorer | Stop-Process
 }
-Set-Alias -Name rex -Value Reset-Explorer
+
+Set-Alias -Name rex value Restart-Explorer
+
+function Invoke-LazyGit{
+    [CmdletBinding()]
+    param (
+        [Parameter(
+            Position=0
+        )]
+        [String]
+        $CommitMessage = "."
+    )
+    git add .
+    git commit -m $CommitMessage
+    git push
+}
+Set-Alias -Name lazygit -Value Invoke-LazyGit
+Set-Alias -Name g -Value Invoke-LazyGit
